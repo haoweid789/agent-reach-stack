@@ -1,0 +1,40 @@
+{
+  "name": "@agent-reach/plugin-sdk",
+  "version": "1.0.0",
+  "description": "SDK for building Agent-Reach plugins",
+  "type": "module",
+  "main": "dist/plugin-sdk.js",
+  "types": "dist/plugin-sdk.d.ts",
+  "exports": {
+    ".": "./dist/plugin-sdk.js",
+    "./types": "./dist/plugin-types.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/plugin-sdk.ts",
+    "test": "node --test test/**/*.test.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "agent-reach",
+    "plugin",
+    "sdk",
+    "extensible"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

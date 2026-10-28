@@ -1,0 +1,76 @@
+{
+  "name": "@agent-reach/mcp-server",
+  "version": "1.0.0",
+  "description": "MCP Server, A2A Server, and Plugin System for Agent-Reach - exposes 14 platform channels as MCP tools, A2A skills, and extensible plugins",
+  "type": "module",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haoweid789/agent-reach-stack.git"
+  },
+  "homepage": "https://github.com/haoweid789/agent-reach-stack#readme",
+  "bugs": {
+    "url": "https://github.com/haoweid789/agent-reach-stack/issues"
+  },
+  "author": "haoweid789",
+  "license": "MIT",
+  "exports": {
+    ".": "./dist/index.js",
+    "./plugin-sdk": "./dist/plugin-sdk.js",
+    "./plugin-manager": "./dist/plugin-manager.js"
+  },
+  "bin": {
+    "agent-reach-mcp": "dist/index.js",
+    "agent-reach-a2a": "dist/a2a-server.js",
+    "agent-reach-plugin": "dist/plugin-cli.js"
+  },
+  "scripts": {
+    "build": "npm run build:packages && tsc",
+    "build:packages": "npm run build --workspace @agent-reach/sdk && npm run build --workspace @agent-reach/langgraph && npm run build --workspace @agent-reach/crewai && npm run build --workspace @agent-reach/autogen",
+    "build:sdk": "npm run build --workspace @agent-reach/sdk",
+    "dev": "tsx watch src/index.ts",
+    "dev:a2a": "tsx watch src/a2a-server.ts",
+    "dev:plugin": "tsx watch src/plugin-cli.ts",
+    "start": "node dist/index.js",
+    "start:a2a": "node dist/a2a-server.js",
+    "plugin": "node dist/plugin-cli.js",
+    "test": "node --test dist/**/*.test.js",
+    "test:packages": "npm run test --workspaces --if-present",
+    "clean": "node -e \"const{rmSync}=require('node:fs');['dist','packages/sdk/dist','packages/langgraph/dist','packages/crewai/dist','packages/autogen/dist'].forEach(d=>rmSync(d,{recursive:true,force:true}))\""
+  },
+  "workspaces": [
+    "packages/sdk",
+    "packages/langgraph",
+    "packages/crewai",
+    "packages/autogen"
+  ],
+  "dependencies": {
+    "@agent-reach/sdk": "^1.0.0",
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "uuid": "^10.0.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/uuid": "^10.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "agent-reach",
+    "mcp",
+    "a2a",
+    "model-context-protocol",
+    "agent-to-agent",
+    "plugin",
+    "extensible"
+  ]
+}

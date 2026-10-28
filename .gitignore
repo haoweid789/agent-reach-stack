@@ -1,0 +1,18 @@
+node_modules/
+*.tsbuildinfo
+
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+.venv/
+venv/
+
+# backend: launcher backups written by install.py
+*.bak-agent-reach
+
+# local config and scratch output
+.env
+firecrawl.json
+*.log
+_integration_probe.mjs

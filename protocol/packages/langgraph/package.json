@@ -1,0 +1,63 @@
+{
+  "name": "@agent-reach/langgraph",
+  "version": "1.0.0",
+  "description": "LangGraph adapter for Agent-Reach - create Reach nodes and tools for 14 platforms",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!dist/*.test.js",
+    "!dist/*.test.js.map",
+    "!dist/*.test.d.ts",
+    "!dist/*.test.d.ts.map",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "prepublishOnly": "npm run build",
+    "test": "node --test dist/**/*.test.js"
+  },
+  "keywords": [
+    "agent-reach",
+    "mcp",
+    "a2a",
+    "langgraph",
+    "llm",
+    "agent"
+  ],
+  "author": "haoweid789",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haoweid789/agent-reach-mcp.git",
+    "directory": "packages/langgraph"
+  },
+  "homepage": "https://github.com/haoweid789/agent-reach-mcp/tree/main/packages/langgraph",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@agent-reach/sdk": "^1.0.0"
+  },
+  "peerDependencies": {
+    "@langchain/langgraph": ">=0.2.0"
+  },
+  "peerDependenciesMeta": {
+    "@langchain/langgraph": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

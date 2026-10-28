@@ -1,0 +1,57 @@
+{
+  "name": "@agent-reach/sdk",
+  "version": "1.0.0",
+  "description": "TypeScript SDK for Agent-Reach - unified client for 14 platform channels with CLI and A2A transports",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./channels": {
+      "types": "./dist/channels.d.ts",
+      "import": "./dist/channels.js",
+      "default": "./dist/channels.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!dist/*.test.js",
+    "!dist/*.test.js.map",
+    "!dist/*.test.d.ts",
+    "!dist/*.test.d.ts.map",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "prepublishOnly": "npm run build",
+    "test": "node --test dist/**/*.test.js"
+  },
+  "keywords": [
+    "agent-reach",
+    "sdk",
+    "typescript",
+    "a2a",
+    "mcp",
+    "multi-platform"
+  ],
+  "author": "haoweid789",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haoweid789/agent-reach-mcp.git",
+    "directory": "packages/sdk"
+  },
+  "homepage": "https://github.com/haoweid789/agent-reach-mcp/tree/main/packages/sdk",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

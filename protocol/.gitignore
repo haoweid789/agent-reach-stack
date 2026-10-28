@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Python build output
+python/*/dist/
+python/*/build/
+
+# Build output
+# 注意：dist/ 默认保留在仓库中，以便使用者无需本地构建即可直接运行
+# 如需源码分发，可取消下面一行的注释
+# dist/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# Runtime
+*.pid
+coverage/
+.nyc_output/
+tmp/
+temp/
+
+# Plugin sandbox
+plugins/
+*.plugin

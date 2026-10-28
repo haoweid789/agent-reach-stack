@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-reach-sdk"
+version = "1.0.0"
+description = "Python SDK for Agent-Reach - one client for 14 platform channels, with CLI and A2A transports"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "haoweid789" }]
+keywords = [
+    "agent-reach",
+    "sdk",
+    "mcp",
+    "a2a",
+    "llm",
+    "agent",
+    "multi-platform",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = ["httpx>=0.24.0"]
+
+[project.optional-dependencies]
+langgraph = ["langgraph>=0.2.0"]
+crewai = ["crewai>=0.100.0"]
+autogen = ["ag2>=0.7.0"]
+agentuniverse = ["agentuniverse>=0.1.0"]
+agentmesh = ["agentmesh>=0.1.0"]
+dev = ["pytest>=7.4", "pytest-asyncio>=0.21"]
+
+[project.urls]
+Homepage = "https://github.com/haoweid789/agent-reach-mcp"
+Repository = "https://github.com/haoweid789/agent-reach-mcp"
+Issues = "https://github.com/haoweid789/agent-reach-mcp/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["agent_reach*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

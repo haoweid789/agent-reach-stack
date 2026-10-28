@@ -1,0 +1,5 @@
+# Exclude compiled tests from the published package
+*.test.js
+*.test.js.map
+*.test.d.ts
+*.test.d.ts.map
