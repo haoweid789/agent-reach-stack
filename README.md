@@ -6,7 +6,7 @@ Agent-Reach 的完整工具栈：**一层协议、一层后端**，一个仓库�
 ┌─────────────────────────────────────────────────┐
 │  protocol/   谁在调用                              │
 │  MCP / A2A / Plugin 服务（TypeScript）             │
-│  CC · Cursor · VS Code · LangGraph · CrewAI       │
+│  Claude Code · Cursor · VS Code · LangGraph · CrewAI       │
 └────────────────────────┬────────────────────────┘
                          │  spawn agent-reach <channel> <action>
 ┌────────────────────────▼────────────────────────┐
