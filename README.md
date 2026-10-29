@@ -1,5 +1,7 @@
 # agent-reach-stack
 
+[![M8ven Verified](https://m8ven.ai/badge/mcp/haoweid789/agent-reach-stack?variant=verified)](https://m8ven.ai/mcp/haoweid789/agent-reach-stack?s=readme)
+
 Agent-Reach 的完整工具栈：**一层协议、一层后端**，一个仓库装好。
 
 ```
