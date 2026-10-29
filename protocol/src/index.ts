@@ -13,6 +13,7 @@ import {
   ListPromptsRequestSchema,
   GetPromptRequestSchema,
   Tool,
+  ToolAnnotations,
   Resource,
   Prompt,
 } from '@modelcontextprotocol/sdk/types.js';
@@ -21,6 +22,40 @@ import { executeChannelAction, executeAutoRead, listChannels, checkAgentReach, g
 
 const SERVER_NAME = 'agent-reach';
 const SERVER_VERSION = '1.0.0';
+
+/**
+ * Tool annotations, as defined by the MCP spec. Clients use them as hints when
+ * deciding whether to auto-approve a call, so they must describe what the tool
+ * actually does rather than what would be convenient.
+ *
+ * Every channel action shells out to `agent-reach <channel> <action>`, which only
+ * reads from a remote platform: nothing is written locally, nothing is posted or
+ * deleted upstream. Hence readOnlyHint everywhere and destructiveHint nowhere.
+ *
+ * idempotentHint is false on purpose. Scraping the same URL twice returns
+ * different data as the underlying page, search index or price moves, so the
+ * result of a repeated call is not the declared result of the first call.
+ */
+const NETWORK_ANNOTATIONS: ToolAnnotations = {
+  readOnlyHint: true,
+  destructiveHint: false,
+  idempotentHint: false,
+  openWorldHint: true,
+};
+
+/** Local introspection only: reads the channel catalog out of this process. */
+const LOCAL_ANNOTATIONS: ToolAnnotations = {
+  readOnlyHint: true,
+  destructiveHint: false,
+  idempotentHint: true,
+  openWorldHint: false,
+};
+
+/** "hot_posts" -> "Hot posts", for the human-facing tool title. */
+function humanizeAction(name: string): string {
+  const spaced = name.replace(/_/g, ' ');
+  return spaced.charAt(0).toUpperCase() + spaced.slice(1);
+}
 
 // Build MCP tool definitions from channel definitions
 function buildTools(): Tool[] {
@@ -52,7 +87,9 @@ function buildTools(): Tool[] {
 
       tools.push({
         name: `${channel.id}_${action.name}`,
+        title: `${channel.name}: ${humanizeAction(action.name)}`,
         description: `[${channel.name}] ${action.description}`,
+        annotations: NETWORK_ANNOTATIONS,
         inputSchema: {
           type: 'object',
           properties: properties as Record<string, object>,
@@ -66,7 +103,9 @@ function buildTools(): Tool[] {
   // Add auto-read tool for any URL
   tools.push({
     name: 'auto_read',
+    title: 'Auto read any URL',
     description: 'Automatically detect platform from URL and read content (agent-reach read <url>)',
+    annotations: NETWORK_ANNOTATIONS,
     inputSchema: {
       type: 'object',
       properties: {
@@ -81,7 +120,9 @@ function buildTools(): Tool[] {
   // Add list channels tool
   tools.push({
     name: 'list_channels',
+    title: 'List channels',
     description: 'List all available channels with their actions and parameters',
+    annotations: LOCAL_ANNOTATIONS,
     inputSchema: {
       type: 'object',
       properties: {
